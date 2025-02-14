@@ -1,7 +1,9 @@
 import React from 'react'
 import Slip from './Slip'
+import {Link} from 'react-router-dom'
 
 const Body = () => {
+
   return (
     <div>
        <div className="lop" style={{background:"linear-gradient(#e3e5e6,#ece6cb,#e4e4e2,#eee8cd)"}}>
@@ -12,7 +14,8 @@ const Body = () => {
             <div className="container text-center w-md-50 w-100" >
             <h1 className='' style={{fontSize:"40px",fontFamily:"Urbanist, serif"}}>Alternative finance for <span style={{color:"#37c0c0",fontSize:"40px"}}>underserved</span> Africans.</h1>
             <p>We make access to micro-credit easy for SMEs and corporate worker at zero-interest. Become a part of our community financing digital rotating savings and credit platform (ROSCA) to get started</p><br/>
-            <button className='btn text-center py-8 rounded-pill' style={{background:"#b484ff",cursor:"pointer",width:"150px"}} onClick={(e)=> window.location.href="/signup"}>Get started</button>
+           <Link to="/signup" className='btn text-center py-8 rounded-pill' style={{background:"#b484ff",cursor:"pointer"}}>Get started</Link>
+         
             </div>
         </div>
        </div>
