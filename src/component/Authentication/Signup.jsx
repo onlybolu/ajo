@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../logo/Logo'
+import {Link} from 'react-router-dom'
 const Signup = () => {
   return (
     <div style={{background:"linear-gradient(#e3e5e6,#ece6cb,#e4e4e2,#eee8cd)", height:"100vh",position:"fixed",width:"100%"}}>
@@ -30,7 +31,7 @@ const Signup = () => {
             </form>
             <button className='d-flex align-items-center justify-center btn w-100 text-center mt-4  border border-dark p-1 rounded-pill' style={{cursor:"pointer",textAlign:"center"}}><img className='w-7' src="./Googlelogo.webp" alt="" /> Google </button>
             <div>
-            <p className='text-center text-secondary mt-4'>Already have an account? <a href="/login">Login</a></p>
+            <p className='text-center text-secondary mt-4'>Already have an account? <Link to="/login">Login</Link></p>
         </div>
             </div>
             
