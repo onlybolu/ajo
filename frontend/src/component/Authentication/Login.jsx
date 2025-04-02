@@ -45,7 +45,7 @@ const Login = () => {
       }}
     >
       <Logo />
-      <div className="d-flex justify-content-center gap-5 align-items-center h-100 w-100">
+      <div className="sanda d-flex justify-content-center gap-5 align-items-center h-100 w-100" style={{overflowY:"scroll"}}>
         <div>
           <form action="submit" onSubmit={handleSubmit}>
             <div>

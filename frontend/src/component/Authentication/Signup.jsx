@@ -59,7 +59,7 @@ const Signup = () => {
     >
       <Logo />
        <ToastContainer />
-      <div className="d-flex justify-content-center align-items-center h-100 w-100">
+      <div className="sanda d-flex justify-content-center align-items-center h-100 w-100" style={{overflowY:"scroll"}}>
         <div>
           <form action="submit" onSubmit={handleSubmit}>
             <div>

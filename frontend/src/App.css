@@ -9,3 +9,8 @@
         display: none;
     }
 }
+.sanda{
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
