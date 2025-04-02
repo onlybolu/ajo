@@ -15,7 +15,7 @@ const Login = () => {
     setLoading(true); // Set loading to true when the request starts
 
     axios
-      .post("http://ajo-gkaq.vercel.app/login", { email, password })
+      .post("http://localhost:3000/login", { email, password })
       .then((result) => {
         if (result.status === 200) {
           toast("Login successful");
@@ -39,13 +39,15 @@ const Login = () => {
     <div
       style={{
         background: "linear-gradient(#e3e5e6,#ece6cb,#e4e4e2,#eee8cd)",
-        height: "100vh",
-        position: "fixed",
+        // height: "100vh",
+        // position: "fixed",
         width: "100%",
       }}
     >
-      <Logo />
-      <div className="sanda d-flex justify-content-center gap-5 align-items-center h-100 w-100" style={{overflowY:"scroll",height:"100vh"}}>
+     <div style={{position:"sticky",zIndex:"1000",top:"0"}}>
+     <Logo />
+     </div>
+      <div className="sanda d-flex justify-content-center gap-5 align-items-center w-100" style={{overflowY:"scroll",height:"120vh"}}>
         <div>
           <form action="submit" onSubmit={handleSubmit}>
             <div>

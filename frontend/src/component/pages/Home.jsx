@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 // import Marquee from '../marquees/Marquee'
 import Header from '../features/Header'
 import Footer from '../features/Footer'

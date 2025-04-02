@@ -17,24 +17,26 @@ mongoose.connect(process.env.MONGO_URL, {
 }
 )
 
-app.post("/signup", async (req, res) => {
-    const { fullname, email, password, nationality, reason } = req.body;
-
+app.post("/signup", (req,res) => {
+    // const User = req.body;
+    
+    
+    
     try {
         // Check if the user already exists
-        const existingUser = await UserModel.findOne({ email });
+        const existingUser = UserModel.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
 
         UserModel.create(req.body)
-        .then(users => res.json(users))
-        .catch(err => (err))
+    .then(users => res.json(users))
+    // .catch(err => (err))
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: "An error occurred" });
     }
-});
+})
 
 app.post("/login", (req,res) => {
     const email = req.body.email;
