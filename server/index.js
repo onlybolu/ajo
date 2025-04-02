@@ -12,26 +12,34 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
-.then(() => {
+}).then(() => {
     console.log("MongoDB connected");
 }
 )
 
-app.post("/signup", (req,res) => {
-    // const User = req.body;
-    UserModel.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => (err))
-    
-    // if(!User.fullname || User.email || User.password){
-    //     return res.status(400).json({success:false, message: "Please fill all fields"})
-    // }
-})
+app.post("/signup", async (req, res) => {
+    const { fullname, email, password, nationality, reason } = req.body;
+
+    try {
+        // Check if the user already exists
+        const existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "User already exists" });
+        }
+
+        UserModel.create(req.body)
+        .then(users => res.json(users))
+        .catch(err => (err))
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "An error occurred" });
+    }
+});
 
 app.post("/login", (req,res) => {
     const email = req.body.email;
     const password = req.body.password;
+    
 
     UserModel.findOne({email, password})
    .then(user => {

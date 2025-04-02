@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     fullname: {
-    type: String,
-    required: true,
+        type: String,
+        required: true,
     },
     email: {    
         type: String,
@@ -13,11 +13,18 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }},
-    {
-        timestamps:true
-
-})
+    },
+    nationality: { // Add nationality field
+        type: String,
+        required: true, // Make it required
+    },
+    reason: { // Add nationality field
+        type: String,
+        required: true, // Make it required
+    }
+}, {
+    timestamps: true
+});
 
 const UserModel = mongoose.model("users", UserSchema);
-export default UserModel
+export default UserModel;

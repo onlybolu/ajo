@@ -1,31 +1,40 @@
-import React from "react";
+import  { useState } from "react";
 import Logo from "../logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the request starts
 
-    axios.post("http://localhost:3000/login", {email,password})
-    .then((result) =>{
-      alert("login sucessful")
-      if(result.status ==200){
-        navigate("/")
-      }
-      else{
-        console.log("err")
-      }
-    })
-    .catch((err) =>{
-      alert("error")
-    })
-    console.log(email, password);
+    axios
+      .post("http://localhost:3000/login", { email, password })
+      .then((result) => {
+        if (result.status === 200) {
+          toast("Login successful");
+          setTimeout(() => {
+            navigate("/"); // Redirect after 3 seconds
+          }, 2000); 
+        } else {
+          toast.error("Login failed");
+        }
+      })
+      .catch((err) => {
+        toast.error("An error occurred during login");
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false when the request completes
+      });
   };
+
   return (
     <div
       style={{
@@ -38,20 +47,17 @@ const Login = () => {
       <Logo />
       <div className="d-flex justify-content-center gap-5 align-items-center h-100 w-100">
         <div>
-          <form action="submit">
+          <form action="submit" onSubmit={handleSubmit}>
             <div>
               <div>
-                <h2 className="d-flex align-items-center  justify-content-center">
+                <h2 className="d-flex align-items-center justify-content-center">
                   Login
                 </h2>
-                <p className="text-secondary ">
-                  sign in for secured monthly payout
+                <p className="text-secondary">
+                  Sign in for secured monthly payout
                 </p>
               </div>
-              {/* <div className='d-flex flex-column mb-4 gap-2'>
-                    <label htmlFor="firstname">Full name</label>
-                    <input className="form-control bg-white text-dark border rounded-pill" type="text" name="text" id="text" placeholder='Amiele pounders' required/>
-                </div> */}
+              <ToastContainer />
               <div className="d-flex flex-column mb-4 gap-2">
                 <label htmlFor="Email">Email</label>
                 <input
@@ -81,22 +87,25 @@ const Login = () => {
             </div>
             <button
               className="btn w-100 text-center p-1 rounded-pill"
-              style={{ background: "#b484ff", cursor: "pointer" }}
+              style={{
+                background: "#b484ff",
+                cursor: loading ? "not-allowed" : "pointer", // Change cursor when loading
+              }}
               type="submit"
-              onClick={handleSubmit}
+              disabled={loading} // Disable button when loading
             >
-              Login
+              {loading ? "Logging in..." : "Login"} {/* Show loading text */}
             </button>
           </form>
           <button
-            className="d-flex align-items-center justify-center btn w-100 text-center mt-4  border border-dark p-1 rounded-pill"
+            className="d-flex align-items-center justify-center btn w-100 text-center mt-4 border border-dark p-1 rounded-pill"
             style={{ cursor: "pointer", textAlign: "center" }}
           >
             <img className="w-7" src="./Googlelogo.webp" alt="" /> Google{" "}
           </button>
           <div>
             <p className="text-center text-secondary mt-4">
-              don't have an account? <Link to="/signup">sign up</Link>
+              Don’t have an account? <Link to="/signup">Sign up</Link>
             </p>
           </div>
         </div>

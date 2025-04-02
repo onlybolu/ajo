@@ -1,29 +1,53 @@
-import React from "react";
+import { useState } from "react";
 import Logo from "../logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 const Signup = () => {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nationality, setNationality] = useState(""); 
+  const [reason, setReason] = useState(""); 
+  const [loading, setLoading] = useState(false); // Add loading state
+  const [isChecked, setIsChecked] = useState(false); // Add checkbox state
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!isChecked) {
+      alert("You must agree to the terms before signing up.");
+      return;
+    }
+
+    setLoading(true); // Set loading to true when the request starts
+
     axios
-      .post("http://localhost:3000/signup", { fullname, email, password })
+      .post("http://localhost:3000/signup", { fullname, email, password, nationality, reason })
       .then((result) => {
-        alert("successful");
         if (result.status === 200) {
-          navigate("/login");
+          toast("Signup successful");
+          setTimeout(() => {
+            navigate("/login"); // Redirect after 3 seconds
+          }, 2000)
         } else {
-          alert("error");
+          alert("Signup failed");
         }
       })
-      .catch((err) => console.error("Error occurred:", err));
-    // console.log(fullname, email, password);
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          toast.error(err.response.data.message); // Show "User already exists" message
+        } else {
+          toast.error("An error occurred during signup"); // Show generic error message
+        }
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false when the request completes
+      });
   };
+
   return (
     <div
       style={{
@@ -34,6 +58,7 @@ const Signup = () => {
       }}
     >
       <Logo />
+       <ToastContainer />
       <div className="d-flex justify-content-center align-items-center h-100 w-100">
         <div>
           <form action="submit" onSubmit={handleSubmit}>
@@ -43,7 +68,7 @@ const Signup = () => {
                   Create an account
                 </h2>
                 <p className="text-secondary ">
-                  signup for secured monthly payout
+                  Signup for secured monthly payout
                 </p>
               </div>
               <div className="d-flex flex-column mb-3 gap-2">
@@ -53,7 +78,7 @@ const Signup = () => {
                   type="text"
                   name="text"
                   id="text"
-                  placeholder="Amiele pounders"
+                  placeholder="Amiele Pounders"
                   onChange={(e) => setFullname(e.target.value)}
                   value={fullname}
                   required
@@ -85,14 +110,73 @@ const Signup = () => {
                   required
                 />
               </div>
+              <div className="d-flex flex-column mb-3 gap-2">
+                <label htmlFor="nationality">Nationality</label>
+                <select
+                  className="form-control bg-white  border rounded-pill"
+                  id="nationality"
+                  onChange={(e) => setReason(e.target.value)}
+                  value={reason}
+                  style={{ outline: "none", color: "grey" }}
+                  required
+                >
+                  <option value="" disabled>
+                    Select your nationality
+                  </option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Canada">Canada</option>
+                  <option value="India" disabled>India</option>
+                  <option value="Germany">Germany</option>
+                  <option value="France">France</option>
+                  <option value="Australia">Australia</option>
+                  <option value="South Africa" disabled>South Africa</option>
+                </select>
+              </div>
+              <div className="d-flex flex-column mb-3 gap-2">
+                <label htmlFor="nationality">Acc Reason</label>
+                <select
+                  className="form-control bg-white border rounded-pill"
+                  id="nationality"
+                  onChange={(e) => setNationality(e.target.value)}
+                  value={nationality}
+                  style={{ outline: "none", color: "grey" }}
+                  required
+                >
+                  <option value="" disabled>
+                    Reason
+                  </option>
+                  <option value="Nigeria">Group contribution</option>
+                  <option value="United States">Personal Savings</option>
+                  <option value="United Kingdom">Pay Bills</option>
+                </select>
+              </div>
+              {/* Checkbox for terms */}
+              <div className="form-check mb-3">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="termsCheckbox"
+                  onChange={(e) => setIsChecked(e.target.checked)}
+                  checked={isChecked}
+                  required
+                />
+                <label className="form-check-label" htmlFor="termsCheckbox" style={{textWrap:"wrap",fontSize:"15px"}}>
+                  I agree to terms and agreements
+                </label>
+              </div>
             </div>
             <button
               className="btn w-100 text-center p-1 rounded-pill"
-              style={{ background: "#b484ff", cursor: "pointer" }}
+              style={{
+                background: "#b484ff",
+                cursor: loading ? "not-allowed" : "pointer", // Change cursor when loading
+              }}
               type="submit"
-              // onClick={handleSubmit}
+              disabled={loading} // Disable button when loading
             >
-              Sign up
+              {loading ? "Signing up..." : "Sign up"} {/* Show loading text */}
             </button>
           </form>
           <button
