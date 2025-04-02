@@ -25,7 +25,7 @@ const Signup = () => {
     setLoading(true); // Set loading to true when the request starts
 
     axios
-      .post("http://localhost:3000/signup", { fullname, email, password, nationality, reason })
+      .post("http://ajo-gkaq.vercel.app/signup", { fullname, email, password, nationality, reason })
       .then((result) => {
         if (result.status === 200) {
           toast("Signup successful");
