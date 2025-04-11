@@ -119,8 +119,8 @@ const Signup = () => {
                 <select
                   className="form-control bg-white  border rounded-pill"
                   id="nationality"
-                  onChange={(e) => setReason(e.target.value)}
-                  value={reason}
+                  onChange={(e) => setNationality(e.target.value)}
+                  value={nationality}
                   style={{ outline: "none", color: "grey" }}
                   required
                 >
@@ -143,8 +143,8 @@ const Signup = () => {
                 <select
                   className="form-control bg-white border rounded-pill"
                   id="nationality"
-                  onChange={(e) => setNationality(e.target.value)}
-                  value={nationality}
+                  onChange={(e) => setReason(e.target.value)}
+                  value={reason}
                   style={{ outline: "none", color: "grey" }}
                   required
                 >
