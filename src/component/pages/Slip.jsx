@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 const Slip = () => {
   return (
@@ -8,7 +8,7 @@ const Slip = () => {
             <h1 className='text-center text-md-start'  style={{fontSize:"40px",fontFamily:"Urbanist, serif"}}>Safe, secure and fast.</h1>
             <p className="text-wrap w-full md:w-1/2 text-md-wrap">Receive money into your wallets on Realsavers, get to make transactions with the money and also withdraw it to your bank account or send to third-parties.</p>
             </div><br/>
-            <div className="containerd d-flex flex-column flex-md-row  gap-10">
+            <div className="containerd d-flex px-4 px-md-0 flex-column flex-md-row  gap-10">
                 <div className="" style={{background:"#f5f5f5",padding:"40px 20px",borderRadius:"30px"}}>
                     <div className="card-body">
                         <img src="/naira-search.svg" alt="" /><br/>

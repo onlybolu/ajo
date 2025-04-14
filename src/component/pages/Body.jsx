@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Slip from './Slip'
 import {Link} from 'react-router-dom'
 
