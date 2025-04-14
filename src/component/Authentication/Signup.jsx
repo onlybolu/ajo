@@ -10,8 +10,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [nationality, setNationality] = useState(""); 
   const [reason, setReason] = useState(""); 
-  const [loading, setLoading] = useState(false); // Add loading state
-  const [isChecked, setIsChecked] = useState(false); // Add checkbox state
+  const [loading, setLoading] = useState(false); 
+  const [isChecked, setIsChecked] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -22,11 +22,12 @@ const Signup = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true when the request starts
+    setLoading(true); 
 
     axios
-      .post("https://ajo-backend1.onrender.com/signup", { fullname, email, password, nationality, reason })
+      .post("https://ajo-backend1.onrender.com/signup", {fullname, email, password, nationality, reason})
       .then((result) => {
+        console.log()
         if (result.status === 200) {
           toast("Signup successful");
           setTimeout(() => {
@@ -175,12 +176,12 @@ const Signup = () => {
               className="btn w-100 text-center p-1 rounded-pill"
               style={{
                 background: "#b484ff",
-                cursor: loading ? "not-allowed" : "pointer", // Change cursor when loading
+                cursor: loading ? "not-allowed" : "pointer"
               }}
               type="submit"
-              disabled={loading} // Disable button when loading
+              disabled={loading} 
             >
-              {loading ? "Signing up..." : "Sign up"} {/* Show loading text */}
+              {loading ? "Signing up..." : "Sign up"}
             </button>
           </form>
           <button
