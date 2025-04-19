@@ -1,5 +1,7 @@
 // import React from 'react'
 
+// import { TypewriterEffect } from "../ui/typewriter-ui"
+
 const Slip = () => {
   return (
     <div className='bg-white'>
@@ -41,6 +43,9 @@ const Slip = () => {
                     <p className="text-center text-md-start">Any time Kunle packed a rotating savings or access credit on Realsavers, Kunle spend his money from his Realsavers wallets without the hassle of always having to move it out before spending. Kunle credibility grows more on Realsavers because of this.</p>
                 </div>
             </div><br/>
+
+            {/* {acternity ui} */}
+            {/* <TypewriterEffect className="text-black" words={words}/> */}
         </div>
     </div>
   )

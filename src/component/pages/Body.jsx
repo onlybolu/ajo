@@ -1,4 +1,6 @@
 // import React from 'react'
+import BodyFooter from '../features/bodyfooter'
+// import Subscribe from '../features/subcribe'
 import Slip from './Slip'
 import {Link} from 'react-router-dom'
 
@@ -20,6 +22,7 @@ const Body = () => {
         </div>
        </div>
         <Slip/>
+        <BodyFooter/>
     </div>
   )
 }

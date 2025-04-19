@@ -3,25 +3,56 @@ import Logo from "../logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { MultiStepLoader as Loader } from "../ui/multi-step-loader"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
+
+
+  const loadingStates = [
+    {
+      text: "Buying a condo",
+    },
+    {
+      text: "Travelling in a flight",
+    },
+    {
+      text: "Meeting Tyler Durden",
+    },
+    {
+      text: "Buying a car",
+    },
+    {
+      text: "We goto a bar",
+    },
+    {
+      text: "Buying a house",
+    },
+    {
+      text: "Pay a bill",
+    },
+    {
+      text: "Welcome to Realsavers",
+    },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when the request starts
-
+   
     axios
       .post("https://ajo-backend1.onrender.com/login", { email, password })
       .then((result) => {
         if (result.status === 200) {
           toast("Login successful");
+          setIsLoading(true)
           setTimeout(() => {
             navigate("/"); // Redirect after 3 seconds
-          }, 2000); 
+          }, 14500); 
         } else {
           toast.error("Login failed");
         }
@@ -44,8 +75,18 @@ const Login = () => {
         width: "100%",
       }}
     >
+    {isLoading && 
+      <div className="w-full h-[100vh] absolute flex items-center justify-center">
+      {/* Core Loader Modal */}
+      <Loader loadingStates={loadingStates} loading={isLoading} duration={2000} />
+      {/* The buttons are for demo only, remove it in your actual code ⬇️ */}
+     
+      
+    </div>
+      }
      <div style={{position:"sticky",zIndex:"1000",top:"0"}}>
      <Logo />
+
      </div>
       <div className="sanda d-flex justify-content-center gap-5 align-items-center w-100" style={{overflowY:"scroll",height:"120vh"}}>
         <div>
