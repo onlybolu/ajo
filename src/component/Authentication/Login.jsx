@@ -21,7 +21,7 @@ const Login = () => {
       text: "Travelling in a flight",
     },
     {
-      text: "Meeting Tyler Durden",
+      text: "Borrow loan",
     },
     {
       text: "Buying a car",
@@ -51,7 +51,7 @@ const Login = () => {
           toast("Login successful");
           setIsLoading(true)
           setTimeout(() => {
-            navigate("/"); // Redirect after 3 seconds
+            navigate("/");
           }, 14500); 
         } else {
           toast.error("Login failed");
@@ -62,7 +62,7 @@ const Login = () => {
         console.log(err);
       })
       .finally(() => {
-        setLoading(false); // Set loading to false when the request completes
+        setLoading(false); 
       });
   };
 
@@ -76,7 +76,7 @@ const Login = () => {
       }}
     >
     {isLoading && 
-      <div className="w-full h-[100vh] absolute flex items-center justify-center">
+      <div className="w-full h-[60vh] my-auto flex items-center justify-center">
       {/* Core Loader Modal */}
       <Loader loadingStates={loadingStates} loading={isLoading} duration={2000} />
     </div>
