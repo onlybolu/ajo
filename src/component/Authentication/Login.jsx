@@ -84,6 +84,7 @@ const Login = () => {
       
     </div>
       }
+      
      <div style={{position:"sticky",zIndex:"1000",top:"0"}}>
      <Logo />
 
