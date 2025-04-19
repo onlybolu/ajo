@@ -79,14 +79,11 @@ const Login = () => {
       <div className="w-full h-[100vh] absolute flex items-center justify-center">
       {/* Core Loader Modal */}
       <Loader loadingStates={loadingStates} loading={isLoading} duration={2000} />
-      {/* The buttons are for demo only, remove it in your actual code ⬇️ */}
-     
-      
     </div>
       }
       
-     <div style={{position:"sticky",zIndex:"1000",top:"0"}}>
-     <Logo />
+     <div  className={`${isLoading ? "hidden" : "flex"}`} style={{position:"sticky",zIndex:"1000",top:"0"}}>
+     <Logo  />
 
      </div>
       <div className="sanda d-flex justify-content-center gap-5 align-items-center w-100" style={{overflowY:"scroll",height:"120vh"}}>

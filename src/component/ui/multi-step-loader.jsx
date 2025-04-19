@@ -43,7 +43,7 @@ const LoaderCore = ({
   value = 0
 }) => {
   return (
-    <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-40">
+    <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-0">
       {loadingStates.map((loadingState, index) => {
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0); // Minimum opacity is 0, keep it 0.2 if you're sane.
