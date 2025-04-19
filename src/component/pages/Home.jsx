@@ -15,7 +15,7 @@ const Home = () => {
      </div>
       </div>
       <br/>
-     <div className="flex">
+     <div className="footer flex">
      <Footer/>
      </div>
     </div>
